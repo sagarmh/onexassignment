@@ -4,12 +4,14 @@
       style="width: 600px; height: 250px"
       class="ag-theme-alpine"
       [rowData]="rowData"
+      [context]="context"
       [columnDefs]="columnDefs"
     >
     </ag-grid-angular>
   </section>
-  <section class="Table-details">
-
-
+  <section class="table-details">
+    <section class="selected-car">
+      <h1 *ngIf="selectedCar">You Have selected " {{this.carModel}} " from {{this.selectedCar}}. It will cost  you {{this.carPrice}}</h1>
+    </section>
   </section>
 </section>

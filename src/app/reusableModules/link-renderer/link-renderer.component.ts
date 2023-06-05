@@ -1,36 +1,35 @@
-import {Component} from "@angular/core";
-import {ICellRendererAngularComp} from 'ag-grid-angular';
-import {ICellRendererParams} from "ag-grid-community";
+import { Component } from '@angular/core';
+import { ICellRendererAngularComp } from 'ag-grid-angular';
+import { ICellRendererParams } from 'ag-grid-community';
 
 @Component({
   selector: 'app-link-renderer',
-  template: `
-             <a href="javascript:void()" (click)="buttonClicked()">{{this.cellValue}}</a>`
+  templateUrl: './link-renderer.component.html',
+  styleUrls: ['./link-renderer.component.css'],
 })
-export class LinkRendererComponent {
+export class LinkRendererComponent implements ICellRendererAngularComp {
+  public params!: ICellRendererParams;
   public cellValue!: string;
 
-   // gets called once before the renderer is used
-   agInit(params: ICellRendererParams): void {
-       this.cellValue = this.getValueToDisplay(params);
-   }
+  selected = '';
 
+  // gets called once before the renderer is used
+  agInit(params: ICellRendererParams): void {
+    this.cellValue = this.getValueToDisplay(params);
+    this.params = params;
+  }
 
-   refresh(params: ICellRendererParams): boolean {
-       this.cellValue = this.getValueToDisplay(params);
-       return true;
-   }
+  public buttonClicked() {
+    this.params.context.componentParent.methodFromParent(
+      (this.selected = this.params.node.data)
+    );
+  }
 
-   buttonClicked() {
-       alert(`${this.cellValue} won!`)
-
-      //  this.cellValue..context.componentParent.methodFromParent(
-      //   `RowData: ${this.cellValue}`
-      // );
-   }
-
-   getValueToDisplay(params: ICellRendererParams) {
+  getValueToDisplay(params: ICellRendererParams) {
     return params.valueFormatted ? params.valueFormatted : params.value;
   }
-  
+
+  refresh(): boolean {
+    return false;
+  }
 }

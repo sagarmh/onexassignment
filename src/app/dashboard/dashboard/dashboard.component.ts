@@ -5,14 +5,14 @@ import { LinkRendererComponent } from '../../reusableModules/link-renderer/link-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent {
   public columnDefs: ColDef[] = [
     {
       headerName: 'make',
       field: 'make',
-      cellRenderer: LinkRendererComponent
+      cellRenderer: LinkRendererComponent,
     },
     { field: 'model' },
     { field: 'price' },
@@ -24,9 +24,19 @@ export class DashboardComponent {
     { id: 'c4', make: 'BMW', model: 'M50', price: 60000 },
     { id: 'c14', make: 'Aston Martin', model: 'DBX', price: 190000 },
   ];
-}
+  public context: any;
+  selectedCar: string = "";
+  carModel: string = "";
+  carPrice:number=0;
 
-  // methodFromParent(cell: any) {
-  //   alert('Parent Component Method from ' + cell + '!');
-  // }
-//}
+  constructor() {
+    this.context = { componentParent: this };
+  }
+
+  methodFromParent(selected: any) {
+    this.selectedCar = selected.make;
+    this.carModel = selected.model;
+    this.carPrice = selected.price;
+    console.log('Parent', this.selectedCar);
+  }
+}
