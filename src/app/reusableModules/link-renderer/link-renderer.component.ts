@@ -5,7 +5,7 @@ import {ICellRendererParams} from "ag-grid-community";
 @Component({
   selector: 'app-link-renderer',
   template: `
-             <a href="javascript:void()" (click)="buttonClicked()">{{valueCubed()}}</a>`
+             <a href="javascript:void()" (click)="buttonClicked()">{{this.cellValue}}</a>`
 })
 export class LinkRendererComponent {
   public cellValue!: string;
@@ -15,20 +15,14 @@ export class LinkRendererComponent {
        this.cellValue = this.getValueToDisplay(params);
    }
 
-   
 
-   // gets called whenever the cell refreshes
    refresh(params: ICellRendererParams): boolean {
-       // set value into cell again
        this.cellValue = this.getValueToDisplay(params);
        return true;
    }
-   public valueCubed(): string {
-    return this.cellValue;
-  }
 
    buttonClicked() {
-       alert(`${this.cellValue} medals won!`)
+       alert(`${this.cellValue} won!`)
 
       //  this.cellValue..context.componentParent.methodFromParent(
       //   `RowData: ${this.cellValue}`
