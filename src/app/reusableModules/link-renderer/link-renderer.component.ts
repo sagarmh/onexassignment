@@ -25,9 +25,9 @@ export class LinkRendererComponent {
    buttonClicked() {
        alert(`${this.cellValue} medals won!`)
 
-       this.cellValue..context.componentParent.methodFromParent(
-        `RowData: ${this.cellValue}`
-      );
+      //  this.cellValue..context.componentParent.methodFromParent(
+      //   `RowData: ${this.cellValue}`
+      // );
    }
 
    getValueToDisplay(params: ICellRendererParams) {
