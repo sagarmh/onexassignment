@@ -29,4 +29,4 @@ export class DashboardComponent {
   // methodFromParent(cell: any) {
   //   alert('Parent Component Method from ' + cell + '!');
   // }
-}
+//}
